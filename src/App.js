@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+// context
+import { ItemsProvider } from './context/ItemsContext.js'
+// components
+import Home from './components/Home.jsx'
+import AddItem from './components/AddItem.jsx'
+import UpdateItem from './components/UpdateItem.jsx'
+import NavBar from './Layouts/NavBar.jsx'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <div className='sm:w-3/5 w-4/5 m-auto'>
+                <Router>
+                    <NavBar />
+                    <ItemsProvider>
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/add' element={<AddItem />} />
+                            <Route path='/update/:id' element={<UpdateItem />} />
+                        </Routes>
+                    </ItemsProvider>
+                </Router>
+            </div>
+        </div>
+    )
 }
 
-export default App;
+export default App
